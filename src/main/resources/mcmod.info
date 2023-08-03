@@ -1,0 +1,16 @@
+[
+{
+  "modid": "skyblockessentials",
+  "name": "Skyblock Essentials",
+  "description": "A Mod To add essentials features to your hypixel skyblock experience",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://zffu.ml",
+  "updateUrl": "",
+  "authorList": ["Zffu"],
+  "credits": "Zffu",
+  "logoFile": "skyblockessentials.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
