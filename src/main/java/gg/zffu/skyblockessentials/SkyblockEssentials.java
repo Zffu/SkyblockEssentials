@@ -53,12 +53,20 @@ public class SkyblockEssentials {
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(this.configFile), StandardCharsets.UTF_8));
                 this.config = gson.fromJson(reader, SkyblockEssentialsConfig.class);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                this.logger.warn("The Config file is not valid or existsing! Using default config...");
             }
         }
 
 
+    }
+
+    public void saveConfig() {
+        try {
+            configFile.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(configFile), StandardCharsets.UTF_8));
+            writer.write(gson.toJson(this.config));
+        } catch (Exception e) {}
     }
 
     public static SkyblockEssentials getInstance() {
@@ -89,5 +97,7 @@ public class SkyblockEssentials {
         }
         hasSkyblockScoreboard = false;
     }
+
+
 
 }
