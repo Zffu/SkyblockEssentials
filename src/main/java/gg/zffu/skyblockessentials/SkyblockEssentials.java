@@ -10,6 +10,7 @@ import jline.internal.Log;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -98,6 +99,9 @@ public class SkyblockEssentials {
         hasSkyblockScoreboard = false;
     }
 
+    public static void sendMessage(String message) {
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("§a[SKYBLOCKESSENTIALS] " + message));
+    }
 
 
 }
