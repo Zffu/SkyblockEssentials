@@ -5,7 +5,6 @@ buildscript {
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
-        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 
@@ -15,7 +14,6 @@ plugins {
 }
 
 apply plugin: "net.minecraftforge.gradle.forge"
-apply plugin: 'org.spongepowered.mixin'
 
 version = "1.0.0"
 group = "gg.zffu"
@@ -45,14 +43,6 @@ def systemOs = System.getProperty("os.name").toLowerCase(Locale.ENGLISH)
 
 dependencies {
     'com.google.code.gson:gson:2.10.1'
-    shade('org.spongepowered:mixin:0.7.10-SNAPSHOT') {
-        exclude module: 'launchwrapper'
-        exclude module: 'guava'
-        exclude module: 'gson'
-        exclude module: 'commons-io'
-        exclude module: 'log4j-core'
-    }
-
     if (systemOs.contains("mac"))
     {
         compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209'
@@ -126,21 +116,4 @@ reobf {
     shadowJar {}
 }
 
-jar {
-    manifest.attributes(
-        "FMLCorePlugin" : "gg.zffu.skyblockessentials.mixins.loader.MixinLoader",
-        "ForceLoadAsMod": true,
-        "TweakOrder": 0,
-        "ModSide": "CLIENT",
-        'FMLCorePluginContainsFMLMod': true,
-        'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-        'MixinConfigs': 'mixins.skyblockessentials.json'
-    )
-}
 
-
-sourceSets {
-    main {
-        ext.refMap = "mixins.skyblockessentials.refmap.json"
-    }
-}

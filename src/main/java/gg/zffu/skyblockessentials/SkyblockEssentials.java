@@ -4,13 +4,17 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import gg.zffu.skyblockessentials.commands.DevModeCommand;
 import gg.zffu.skyblockessentials.config.SkyblockEssentialsConfig;
+import gg.zffu.skyblockessentials.listeners.TooltipListener;
 import gg.zffu.skyblockessentials.versioning.BuildType;
 import jline.internal.Log;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -37,6 +41,8 @@ public class SkyblockEssentials {
 
     private boolean hasSkyblockScoreboard;
 
+    public boolean devMode;
+
     private static final Set<String> SKYBLOCK_NAMES =
             Sets.newHashSet("SKYBLOCK", "\u7A7A\u5C9B\u751F\u5B58", "\u7A7A\u5CF6\u751F\u5B58");
 
@@ -44,6 +50,9 @@ public class SkyblockEssentials {
     public void onPreInit(FMLPreInitializationEvent event) {
         logger.info("Loading SkyblockEssentials v" + VERSION);
         INSTANCE = this;
+
+        MinecraftForge.EVENT_BUS.register(new TooltipListener());
+        ClientCommandHandler.instance.registerCommand(new DevModeCommand());
 
         this.modFolder = new File(event.getModConfigurationDirectory(), "skyblockessentials");
         this.modFolder.mkdirs();
