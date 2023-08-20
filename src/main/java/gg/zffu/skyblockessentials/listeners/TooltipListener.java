@@ -21,7 +21,7 @@ public class TooltipListener {
                     hasUUID = true;
                 }
 
-                if(hasUUID) {
+                if(hasUUID && !custom.hasKey("petInfo")) {
                     if(custom.getByte("donated_museum") == (byte) 1) {
                         event.toolTip.add("§a§l✔ §r§8Donated to museum");
                     }
@@ -29,6 +29,10 @@ public class TooltipListener {
                         event.toolTip.add("§c§l✘ §r§8Not Donated to museum");
                     }
                     event.toolTip.add("§8UUID: " + custom.getString("uuid"));
+                }
+
+                if(custom.hasKey("petInfo")) {
+
                 }
 
                 if(custom.getString("id") != "") {
